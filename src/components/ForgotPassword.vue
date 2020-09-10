@@ -21,7 +21,7 @@
             </div>
             <div style="display:none;" id="reset">
                 <label for="senha" class="grey-text">Token</label>
-                <input type="password" id="senha" class="form-control" @input="usuario.token = $event.target.value" :value="usuario.token"/>
+                <input type="password" id="token" class="form-control" @input="usuario.token = $event.target.value" :value="usuario.token"/>
                 <label for="senha" class="grey-text">Nova Senha</label>
                 <input type="password" id="senha" class="form-control" @input="usuario.senha = $event.target.value" :value="usuario.senha"/>
                 <label for="confSenha" class="grey-text">Confirmação de senha</label>
@@ -41,6 +41,14 @@
             </router-link>
         </div>
     </div>   
+    <div v-show="showLoader" class="text-center" id="loader">
+        <v-progress-circular
+        indeterminate
+        color="primary"
+        size="50"
+        width="7"
+        ></v-progress-circular>
+    </div>
   </form>
   <!-- Default form register -->
 </template>
@@ -54,7 +62,8 @@ export default {
              retorno: {
                 erro : false,
                 msg : '',
-            }
+            },
+            showLoader : false,
         }
     },
     methods: {
@@ -64,6 +73,8 @@ export default {
                 this.retorno.msg = 'Email is empty';
                 return;
             }
+            console.log(this.usuario)
+            this.showLoader = true;
 
             this.$http.post(
                 'auth/forgot_password', 
@@ -74,10 +85,12 @@ export default {
                 document.getElementById("btn-token").style.display = "none";
                 document.getElementById("reset").style.display = "";
                 document.getElementById("email").readOnly = true;
+                this.showLoader = false;
             })
             .catch ((error)=> {
                 this.retorno.erro = true;
                 this.retorno.msg = error.body.error;
+                this.showLoader = false;
             })
         },
         resetPassword(){
@@ -134,5 +147,15 @@ export default {
     #success {
         color:green;
         margin-top: 30px;
+    }
+    #loader {
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0,0,0,0.3);
     }
  </style>

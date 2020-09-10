@@ -10,6 +10,7 @@ import { routes } from './routes'
 
 Vue.use(vuetify);
 Vue.use(VueResource);
+//Vue.http.options.root = 'http://localhost:3000/';
 Vue.http.options.root = 'https://portal-royal-api.herokuapp.com/';
 Vue.use(VueRouter);
 

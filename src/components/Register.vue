@@ -30,7 +30,15 @@
             </div>
             <router-link to="/"><span>Login</span></router-link>
         </div>
-    </div>   
+    </div> 
+    <div v-show="showLoader" class="text-center" id="loader">
+        <v-progress-circular
+        indeterminate
+        color="primary"
+        size="50"
+        width="7"
+        ></v-progress-circular>
+    </div>  
   </form>
   <!-- Default form register -->
 </template>
@@ -44,7 +52,8 @@ export default {
             retorno: {
                 erro : false,
                 msg : '',
-            }
+            },
+            showLoader : false,
         }
     },
     methods: {
@@ -73,7 +82,7 @@ export default {
                 this.retorno.msg = 'conf senha is empty';
                 return;
             }
-
+            this.showLoader = true;
             this.$http.post(
                 'auth/register/', 
                 this.usuario
@@ -82,10 +91,12 @@ export default {
                 let token = `Bearer ${res.body.token}`;
                 localStorage.setItem('token', token);
                 this.$router.push({ name: 'comissao'})
+                this.showLoader = false;
             })
             .catch ((error)=> {
                 this.retorno.erro = true;
                 this.retorno.msg = error.body.error;
+                this.showLoader = false;
             })
         }
     }
@@ -121,5 +132,16 @@ export default {
     span {
         margin-left: 10px;
         
+    }
+
+    #loader {
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0,0,0,0.3);
     }
  </style>

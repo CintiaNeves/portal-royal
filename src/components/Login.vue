@@ -1,8 +1,8 @@
 <template>
   <!-- Default form register -->
-  <form  @submit.prevent="authenticar()">
+  <form  @submit.prevent="authenticar()">  
     <div class="container"> 
-        <div class="box">
+        <div class="box" >
             <v-alert
                 v-if="retorno.erro"
                 dense
@@ -24,7 +24,15 @@
             </div>
             <router-link to="register"><span>Criar conta</span></router-link>
         </div>
-    </div>   
+    </div> 
+    <div v-show="showLoader" class="text-center" id="loader">
+        <v-progress-circular
+        indeterminate
+        color="primary"
+        size="50"
+        width="7"
+        ></v-progress-circular>
+    </div>
   </form>
   <!-- Default form register -->
 </template>
@@ -38,12 +46,12 @@ export default {
              retorno: {
                 erro : false,
                 msg : '',
-            }
+            },
+            showLoader : false,
         }
     },
     methods: {
         authenticar() {
-
             if(this.usuario.email === '' && this.usuario.senha === ''){
                 this.retorno.erro = true;
                 this.retorno.msg = 'credentials is empty';
@@ -61,6 +69,7 @@ export default {
                 this.retorno.msg = 'senha is empty';
                 return;
             }
+            this.showLoader = true
             this.$http.post(
                 'auth/authenticate/', 
                 this.usuario
@@ -69,12 +78,16 @@ export default {
                 let token = `Bearer ${res.body.token}`;
                 localStorage.setItem('token', token);
                 this.$router.push({ name: 'comissao'})
+                 this.showLoader = false;
             })
             .catch ((error)=> {
+                console.log(error)
                 this.retorno.erro = true;
                 this.retorno.msg = error.body.error;
                 this.usuario.senha = '';
+                this.showLoader = false;
             })
+           
         }
     }
 }
@@ -109,5 +122,19 @@ export default {
     }
     span {
         margin-left: 10px;
+    }
+
+    .v-progress-circular {
+        margin: 1rem;
+    }
+    #loader {
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0,0,0,0.3);
     }
  </style>
