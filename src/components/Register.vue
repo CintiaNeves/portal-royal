@@ -80,7 +80,7 @@ export default {
             )
             .then ((res)=>  {
                 let token = `Bearer ${res.body.token}`;
-                this.$http.headers.common['Authorization'] = token;
+                localStorage.setItem('token', token);
                 this.$router.push({ name: 'comissao'})
             })
             .catch ((error)=> {

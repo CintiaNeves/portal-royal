@@ -10,7 +10,7 @@ import { routes } from './routes'
 
 Vue.use(vuetify);
 Vue.use(VueResource);
-Vue.http.options.root = 'http://192.168.18.4:3000';
+Vue.http.options.root = 'https://portal-royal-api.herokuapp.com/';
 Vue.use(VueRouter);
 
 const router = new VueRouter({ routes, mode: 'history' });
