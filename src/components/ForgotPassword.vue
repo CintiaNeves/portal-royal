@@ -36,7 +36,7 @@
                 type="success"
                 style="display: none;"
                 >
-                   Senha alterada com sucesso. Faça login novamente.
+                   Senha alterada com sucesso. Clique aqui para fazer login novamente.
                 </v-alert>
             </router-link>
         </div>
@@ -73,7 +73,6 @@ export default {
                 this.retorno.msg = 'Email is empty';
                 return;
             }
-            console.log(this.usuario)
             this.showLoader = true;
 
             this.$http.post(
@@ -94,6 +93,25 @@ export default {
             })
         },
         resetPassword(){
+
+            if(this.usuario.token === ''){
+                this.retorno.erro = true;
+                this.retorno.msg = 'Token is empty';
+                return;
+            }
+
+            if(this.usuario.senha === ''){
+                this.retorno.erro = true;
+                this.retorno.msg = 'Senha is empty';
+                return;
+            }
+
+            if(this.usuario.confSenha === ''){
+                this.retorno.erro = true;
+                this.retorno.msg = 'Confirmação is empty';
+                return;
+            }
+            this.showLoader = true;
             this.$http.post(
                 'auth/reset_password', 
                 this.usuario
@@ -103,10 +121,12 @@ export default {
                 document.getElementById("reset").style.display = "none";
                 document.getElementById("success").style.display = "";
                 document.getElementById("btn-reset").style.display = "none";
+                this.showLoader = false;
             })
             .catch ((error)=> {
                 this.retorno.erro = true;
                 this.retorno.msg = error.body.error;
+                this.showLoader = false;
             })
         }
     }
