@@ -81,13 +81,13 @@ export default {
                 this.usuario
             )
             .then ((res)=>  {
-                console.log(res);
                 document.getElementById("btn-token").style.display = "none";
                 document.getElementById("reset").style.display = "";
                 document.getElementById("email").readOnly = true;
                 this.showLoader = false;
             })
             .catch ((error)=> {
+                console.log(error);
                 this.retorno.erro = true;
                 this.retorno.msg = error.body.error;
                 this.showLoader = false;
