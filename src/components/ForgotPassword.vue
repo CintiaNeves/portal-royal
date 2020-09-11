@@ -28,17 +28,17 @@
                 <input type="password" id="confSenha" class="form-control" @input="usuario.confSenha = $event.target.value" :value="usuario.confSenha"/>
                 <button class="btn btn-unique" type="button" @click="resetPassword()" id="btn-reset">Alterar Senha</button>
             </div> 
-            <router-link to="/">
-                 <v-alert
-                id="success"
-                dense
-                text
-                type="success"
-                style="display: none;"
+             <v-alert
+                    id="success"
+                    dense
+                    text
+                    type="success"
+                    style="display: none;"
                 >
-                   Senha alterada com sucesso. Clique aqui para fazer login novamente.
+                    Senha alterada com sucesso. 
                 </v-alert>
-            </router-link>
+            
+            <router-link to="/"><span>Clique aqui para fazer login.</span></router-link>
         </div>
     </div>   
     <div v-show="showLoader" class="text-center" id="loader">
@@ -80,6 +80,7 @@ export default {
                 this.usuario
             )
             .then ((res)=>  {
+                console.log(res);
                 document.getElementById("btn-token").style.display = "none";
                 document.getElementById("reset").style.display = "";
                 document.getElementById("email").readOnly = true;
@@ -111,7 +112,6 @@ export default {
                 this.retorno.msg = 'Confirmação is empty';
                 return;
             }
-            this.showLoader = true;
             this.$http.post(
                 'auth/reset_password', 
                 this.usuario
@@ -121,12 +121,12 @@ export default {
                 document.getElementById("reset").style.display = "none";
                 document.getElementById("success").style.display = "";
                 document.getElementById("btn-reset").style.display = "none";
-                this.showLoader = false;
+               
             })
             .catch ((error)=> {
                 this.retorno.erro = true;
                 this.retorno.msg = error.body.error;
-                this.showLoader = false;
+             
             })
         }
     }
