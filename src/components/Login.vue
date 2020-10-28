@@ -2,6 +2,9 @@
   <!-- Default form register -->
   <form  @submit.prevent="authenticar()">  
     <div class="container"> 
+        <div class="img"> 
+            <v-img  src="../assets/img/logo.jpeg"></v-img>
+        </div> 
         <div class="box" >
             <v-alert
                 v-if="retorno.erro"
@@ -136,5 +139,17 @@ export default {
         align-items: center;
         justify-content: center;
         background-color: rgba(0,0,0,0.3);
+    }
+
+    .img {
+        max-width:200px;
+        max-height:200px;
+        width: auto;
+        height: auto;
+        display: flex;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0px;
     }
  </style>

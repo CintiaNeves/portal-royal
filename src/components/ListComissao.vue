@@ -54,7 +54,6 @@
           { text: 'Tipo da comissão', value: 'tipo' },
           { text: 'Porcentagem', value: 'porcentagem' },
           { text: 'Valor', value: 'valor' },
-          { text: 'Status', value: 'status' },
         ],
         desserts: [],
         usuario: {},
@@ -81,7 +80,6 @@
           tipo: lista[i].TIPO,
           porcentagem: lista[i].PERCCOM,
           valor: lista[i].VALOR,
-          status: lista[i].STATUS,
         })
       } 
         this.retorno.erro = false;
