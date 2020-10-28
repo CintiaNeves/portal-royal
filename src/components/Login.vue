@@ -2,9 +2,9 @@
   <!-- Default form register -->
   <form  @submit.prevent="authenticar()">  
     <div class="container"> 
-        <div class="img"> 
+       <!-- Default form register  <div class="img"> 
             <v-img  src="../assets/img/logo.jpeg"></v-img>
-        </div> 
+        </div> -->
         <div class="box" >
             <v-alert
                 v-if="retorno.erro"
