@@ -37,7 +37,7 @@
         :items-per-page="10"
         class="elevation-1">
       </v-data-table>
-      <span class="text">Hoje você realizou um total de 1 venda(s), seu total de comissões é de R$20,00.</span>
+      <span class="text">Hoje você realizou um total de {{ vendas}} venda(s), seu total de comissões é de {{ valor }}.</span>
     </div>
  </div>
 </template>
@@ -64,6 +64,8 @@
           erro : true,
           msg : '',
         },
+        vendas:'',
+        valor:'',
       }
     },
     methods: {
@@ -96,6 +98,9 @@
       this.$http.get('commission/totais', {headers: {'Authorization': localStorage.getItem('token')}})
       .then ((res)=>  {
         const totais = res.body;
+        this.vendas = totais[0].VENDAS;
+        this.valor = totais[0].VALOR;
+
         console.log(totais[0]);
       })
       .catch ((error)=> {
