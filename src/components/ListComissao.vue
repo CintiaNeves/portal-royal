@@ -8,7 +8,10 @@
     >
       <v-toolbar dense>
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
-        <v-toolbar-title id="ola">Olá, <span class="name">{{ usuario.nome }} </span></v-toolbar-title>
+        <v-toolbar-title id="ola">Olá, 
+          <span class="name">{{ usuario.nome }} </span>
+          <span class="text">Hoje você realizou um total de 1 venda(s), seu total de comissões é de R$20,00.</span>
+        </v-toolbar-title>
 
         <v-spacer></v-spacer>
         <v-btn icon @click="logout()">
@@ -109,6 +112,10 @@
 
   .name{
     font-size: 1.1rem;
+  }
+
+  .text{
+    font-size: 0.8rem;
   }
 
   #alert{
