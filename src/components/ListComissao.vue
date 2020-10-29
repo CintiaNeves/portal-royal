@@ -90,6 +90,13 @@
         this.retorno.erro = true;
         this.retorno.msg = error.body.error;
       })
+      this.$http.get('commission/totais', {headers: {'Authorization': localStorage.getItem('token')}})
+      .then ((res)=>  {
+        console.log(res);
+      })
+      .catch ((error)=> {
+        console.log(error);
+      })
     },
   }
 </script>
