@@ -10,7 +10,6 @@
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
         <v-toolbar-title id="ola">Olá, 
           <span class="name">{{ usuario.nome }} </span>
-          <span class="text">Hoje você realizou um total de 1 venda(s), seu total de comissões é de R$20,00.</span>
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
@@ -38,6 +37,7 @@
         :items-per-page="10"
         class="elevation-1">
       </v-data-table>
+      <span class="text">Hoje você realizou um total de 1 venda(s), seu total de comissões é de R$20,00.</span>
     </div>
  </div>
 </template>
