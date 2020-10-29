@@ -8,7 +8,8 @@
     >
       <v-toolbar dense>
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
-        <v-toolbar-title id="ola">Olá, <span class="name">{{ usuario.nome }} </span> Total do dia: <span class="name">{{ valor }} </span> Número de vendas: <span class="name">{{ vendas }} </span></v-toolbar-title>
+        <v-toolbar-title id="ola">Olá, <span class="name">{{ usuario.nome }} </span></v-toolbar-title>
+
         <v-spacer></v-spacer>
         <v-btn icon @click="logout()">
           <v-icon >mdi-logout-variant</v-icon>
@@ -56,8 +57,6 @@
         ],
         desserts: [],
         usuario: {},
-        vendas,
-        valor,
         retorno:{
           erro : true,
           msg : '',
@@ -94,9 +93,7 @@
       this.$http.get('commission/totais', {headers: {'Authorization': localStorage.getItem('token')}})
       .then ((res)=>  {
         const totais = res.body;
-        this.vendas = totais[0].VENDAS;
-        this.valor = totais[0].VALOR;
-        console.log(res);
+        console.log(totais[0]);
       })
       .catch ((error)=> {
         console.log(error);
