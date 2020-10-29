@@ -124,7 +124,6 @@
   .text{
     font-size: 0.9rem;
     color: royalblue;
-    font-weight: bold;
   }
 
   #alert{
