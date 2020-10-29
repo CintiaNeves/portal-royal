@@ -20,7 +20,7 @@
       </v-toolbar>
     </v-card>
     <div>
-      <span class="text">Hoje você realizou um total de {{ vendas }} venda(s) e seu total de comissões é de {{ valor }}.</span>
+      <span class="text">Em {{ dtConsulta }} você realizou {{ vendas }} venda(s). Total de comissões:  {{ valor }}.</span>
     </div>
     <div class="container">
       <div id="alert">
@@ -68,6 +68,7 @@
         },
         vendas:'',
         valor:'',
+        dtConsulta:'',
       }
     },
     methods: {
@@ -99,9 +100,11 @@
       })
       this.$http.get('commission/totais', {headers: {'Authorization': localStorage.getItem('token')}})
       .then ((res)=>  {
+
         const totais = res.body;
         this.vendas = totais[0].VENDAS;
         this.valor = totais[0].VALOR;
+        this.dtConsulta = totais[0].DT_CONSULTA;
 
         console.log(totais[0]);
       })
@@ -124,10 +127,6 @@
   .text{
     font-size: 0.9rem;
     color: royalblue;
-  }
-
-  .v-input{
-    display: none;
   }
 
   #alert{
