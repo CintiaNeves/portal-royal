@@ -19,6 +19,9 @@
         </v-btn>
       </v-toolbar>
     </v-card>
+    <div>
+      <span class="text">Hoje você realizou um total de {{ vendas }} venda(s) e seu total de comissões é de {{ valor }}.</span>
+    </div>
     <div class="container">
       <div id="alert">
           <v-alert
@@ -37,7 +40,6 @@
         :items-per-page="10"
         class="elevation-1">
       </v-data-table>
-      <span class="text">Hoje você realizou um total de {{ vendas }} venda(s) e seu total de comissões é de {{ valor }}.</span>
     </div>
  </div>
 </template>
@@ -122,6 +124,7 @@
   .text{
     font-size: 0.9rem;
     color: royalblue;
+    font-weight: bold;
   }
 
   #alert{
