@@ -126,6 +126,10 @@
     color: royalblue;
   }
 
+  .v-input{
+    display: none;
+  }
+
   #alert{
     display: flex; 
     color: red;
